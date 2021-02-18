@@ -24,7 +24,11 @@ products = [
 #
 # INFO CAPTURE / INPUT
 #
-selected_id = input("Please select a product indicator: ")
-print(selected_id)
-print(type(selected_id))
+selected_id = input("Please select a product indicator: ") #string
+matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+matching_products = matching_products[0]
+print("SELECTED PRODUCT: " + matching_products["name"] + " " + str(matching_products["price"]))
 
+
+#
+# INFO DISPLAY / OUTPUT
