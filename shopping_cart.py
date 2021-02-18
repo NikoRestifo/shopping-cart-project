@@ -21,14 +21,28 @@ products = [
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ]
+
+def to_usd(my_price):
+    """
+    Converts a numeric value to usd-formatted string, for printing and display purposes.
+
+    Param: my_price (int or float) like 4000.444444
+
+    Example: to_usd(4000.444444)
+
+    Returns: $4,000.44
+    """
+    return f"${my_price:,.2f}" #> $12,000.71
+
 #
 # INFO CAPTURE / INPUT
 #
 
 total_price = 0
 selected_ids = []
+tax_rate = .0875
 while True:
-    selected_id = input("Please select a product indicator: ") #string
+    selected_id = input("Please select a product indicator, or 'DONE' if there are no more items: ") #string
     if selected_id == "DONE":
         break
     else:
@@ -49,4 +63,12 @@ for selected_id in selected_ids:
     total_price = total_price + matching_product["price"]
     print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
 
-print("TOTAL PRICE: " + str(total_price))
+print("SUBTOTAL: " + str(to_usd(total_price)))
+
+tax = total_price * tax_rate
+
+print("TAX: " + str(to_usd(tax)))
+
+total = total_price + tax
+
+print("TOTAL: " + str(to_usd(total)))
