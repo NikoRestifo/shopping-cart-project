@@ -1,6 +1,14 @@
 #shopping cart project
 
 import datetime
+import json
+import os
+from dotenv import load_dotenv
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+load_dotenv()
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -36,22 +44,52 @@ def to_usd(my_price):
     """
     return f"${my_price:,.2f}" #> $12,000.71
 
+DOCUMENT_ID = os.getenv("GOOGLE_SHEET_ID", default="OOPS")
+SHEET_NAME = os.getenv("SHEET_NAME", default="Products-2021")
+TAX_RATE = float(os.getenv("TAX_RATE", default=".0875"))
+
+#
+# AUTHORIZATION
+#
+
+# an OS-agnostic (Windows-safe) way to reference the "auth/google-credentials.json" filepath:
+CREDENTIALS_FILEPATH = os.path.join(os.path.dirname(__file__), "auth", "google-credentials.json")
+
+AUTH_SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets", #> Allows read/write access to the user's sheets and their properties.
+    "https://www.googleapis.com/auth/drive.file" #> Per-file access to files created or opened by the app.
+]
+
+credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILEPATH, AUTH_SCOPE)
+
+client = gspread.authorize(credentials)
+
+#
+# READ SHEET VALUES
+#
+
+doc = client.open_by_key(DOCUMENT_ID)
+print("-----------------")
+print("READING DOCUMENT...")
+print("-----------------")
+
+#print("SPREADSHEET:", doc.title)
+
+sheet = doc.worksheet(SHEET_NAME)
+
+products = sheet.get_all_records()
+
 #
 # INFO CAPTURE / INPUT
 #
 
 total_price = 0
 selected_ids = []
-tax_rate = .0875
 while True:
     selected_id = input("Please select a product indicator, or 'DONE' if there are no more items: ") #string
     if selected_id == "DONE":
         break
     else:
-        #matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-        #matching_product = matching_products[0]
-        #total_price = total_price + matching_product["price"]
-        #print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
         selected_ids.append(selected_id)
 
 #
@@ -77,7 +115,7 @@ for selected_id in selected_ids:
 
 print("SUBTOTAL: " + str(to_usd(total_price)))
 
-tax = total_price * tax_rate
+tax = total_price * TAX_RATE
 
 print("TAX: " + str(to_usd(tax)))
 
