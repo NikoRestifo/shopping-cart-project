@@ -1,6 +1,6 @@
 # Shopping Cart Project
 
-A program that allows a customer to checkout their grocery items and get the total payment (+tax) they owe for their items.
+A program that allows a customer to checkout their grocery items and get a receipt including the total payment (+tax) they owe for their items.
 
 ## Installation
 
@@ -22,14 +22,13 @@ pip install -r requirements.txt
 
 ## Setup
 
-In in the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to store information required to access the Products Database. Additionally, specify the tax rate:
+In the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to store information required to access the Products Database. Additionally, specify the tax rate:
 
     GOOGLE_SHEET_ID = "1ItN7Cc2Yn4K90cMIsxi2P045Gzw0y2JHB_EkV4mXXpI"
     SHEET_NAME = "products" 
     TAX_RATE="0.0875"
 
 
-> NOTE: the ".env" file is usually the place for passing configuration options and secret credentials, so as a best practice we don't upload this file to version control (which is accomplished via a corresponding entry in the [.gitignore](/.gitignore) file)
 
 ## Usage
 
