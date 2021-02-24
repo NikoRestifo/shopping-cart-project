@@ -24,8 +24,8 @@ pip install -r requirements.txt
 
 In in the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to store information required to access the Products Database. Additionally, specify the tax rate:
 
-    GOOGLE_SHEET_ID = "1_hisQ9kNjmc-cafIasMue6IQG-ql_6TcqFGpVNOkUSE"
-    SHEET_NAME = "Products-2021" 
+    GOOGLE_SHEET_ID = "1ItN7Cc2Yn4K90cMIsxi2P045Gzw0y2JHB_EkV4mXXpI"
+    SHEET_NAME = "products" 
     TAX_RATE="0.0875"
 
 
@@ -38,3 +38,5 @@ Run the program:
 ```py
 python shopping_cart.py
 ```
+
+Enter the product ID for each item in your shopping cart. Type 'DONE' when you are finished entering each product. The program will then output the receipt.
