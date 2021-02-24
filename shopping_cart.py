@@ -48,6 +48,8 @@ DOCUMENT_ID = os.getenv("GOOGLE_SHEET_ID", default="OOPS")
 SHEET_NAME = os.getenv("SHEET_NAME", default="Products-2021")
 TAX_RATE = float(os.getenv("TAX_RATE", default=".0875"))
 
+# Retrieving product info from Google Sheets
+
 #
 # AUTHORIZATION
 #
@@ -109,16 +111,12 @@ print("---------------------------------")
 
 date = datetime.date.today()
 time = datetime.datetime.now()
-print("CHECKOUT AT: ", date, time.strftime("%H:%M:%S"))
+print("CHECKOUT AT: ", date, time.strftime("%I:%M:%S %p"))
 
 print("---------------------------------")
 print("SELECTED PRODUCTS:")
 for matching_product in selected_ids:
-    #matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-    #matching_product = matching_products[0]
-    #total_price = total_price + matching_product["price"]
     print("... " + matching_product["name"] +  " (" + str(to_usd(matching_product["price"])) + ") ")
-
 
 print("SUBTOTAL: " + str(to_usd(total_price)))
 

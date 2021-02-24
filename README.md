@@ -28,8 +28,6 @@ In the root directory of your local repository, create a new file called ".env",
     SHEET_NAME = "products" 
     TAX_RATE="0.0875"
 
-
-
 ## Usage
 
 Run the program:
@@ -38,4 +36,4 @@ Run the program:
 python shopping_cart.py
 ```
 
-Enter the product ID for each item in your shopping cart. Type 'DONE' when you are finished entering each product. The program will then output the receipt.
+Enter the Product ID for each item in your shopping cart. Type 'DONE' when you are finished entering each product. The program will then output the receipt.
