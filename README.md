@@ -22,6 +22,8 @@ pip install -r requirements.txt
 
 ## Setup
 
+In order to setup access to the google sheet which houses the grocery products, follow the steps found here: https://github.com/prof-rossetti/intro-to-python/blob/master/notes/python/packages/gspread.md
+
 In the root directory of your local repository, create a new file called ".env", and update the contents of the ".env" file to store information required to access the Products Database. Additionally, specify the tax rate:
 
     GOOGLE_SHEET_ID = "1ItN7Cc2Yn4K90cMIsxi2P045Gzw0y2JHB_EkV4mXXpI"
