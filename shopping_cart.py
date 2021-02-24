@@ -86,12 +86,17 @@ products = sheet.get_all_records()
 total_price = 0
 selected_ids = []
 while True:
-    selected_id = input("Please select a product indicator, or 'DONE' if there are no more items: ") #string
-    if selected_id == "DONE":
-        break
-    else:
-        selected_ids.append(selected_id)
-
+    try:
+        selected_id = input("Please select a product indicator, or 'DONE' if there are no more items: ") #string
+        if selected_id.lower() == "done":
+            break
+        else:
+            matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+            matching_product = matching_products[0]
+            total_price = total_price + matching_product["price"]
+            selected_ids.append(matching_product)
+    except:
+        print("Invalid Product ID. Please try again")
 #
 # INFO DISPLAY / OUTPUT
 #
@@ -102,16 +107,18 @@ print("MANGIA MARKETPLACE")
 print("WWW.MANGIA-MARKETPLACE.COM")
 print("---------------------------------")
 
-date = datetime.datetime.now()
-print("CHECKOUT AT: " + str(date))
+date = datetime.date.today()
+time = datetime.datetime.now()
+print("CHECKOUT AT: ", date, time.strftime("%H:%M:%S"))
 
 print("---------------------------------")
 print("SELECTED PRODUCTS:")
-for selected_id in selected_ids:
-    matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
-    matching_product = matching_products[0]
-    total_price = total_price + matching_product["price"]
+for matching_product in selected_ids:
+    #matching_products = [p for p in products if str(p["id"]) == str(selected_id)]
+    #matching_product = matching_products[0]
+    #total_price = total_price + matching_product["price"]
     print("... " + matching_product["name"] +  " (" + str(to_usd(matching_product["price"])) + ") ")
+
 
 print("SUBTOTAL: " + str(to_usd(total_price)))
 
