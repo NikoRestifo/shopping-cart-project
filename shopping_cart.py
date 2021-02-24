@@ -102,7 +102,6 @@ while True:
 #
 # INFO DISPLAY / OUTPUT
 #
-#print(selected_ids)
 
 print("---------------------------------")
 print("MANGIA MARKETPLACE")
